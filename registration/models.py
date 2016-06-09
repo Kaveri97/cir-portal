@@ -69,6 +69,7 @@ class User(AbstractBaseUser):
         return self.email
 
 
+
 class StudentManager(models.Manager):
 
     def create_student_fromfile(self, aums_id, name, curr_course, branch, tenth_mark, twelth_mark,
@@ -80,6 +81,7 @@ class StudentManager(models.Manager):
         # do something with the book
         return student
 
+OPTIONS = (('CSE', _('CSE')),('CSA', _('CSA')),('ME', _('ME')),('EEE', _('EEE')),('ECE', _('ECE')))
 
 class Student(models.Model):
 
@@ -87,7 +89,7 @@ class Student(models.Model):
     name = models.CharField(_('First Name'), max_length=32, blank=True, null=True)
     curr_course = models.CharField(_('Current Course'), max_length=32, blank=True, null=True,
                                   validators=[RegexValidator(regex='^[A-Za-z]*$')])
-    branch = models.CharField(_('Branch'), max_length=32, blank=True, null=True,
+    branch = models.CharField(_('Branch'), max_length=32, choices=OPTIONS, blank=True, null=True,
                                   validators=[RegexValidator(regex='^[A-Za-z]*$')])
     tenth_mark = models.FloatField(_('10th Mark'),  blank=True, null=True)
     twelth_mark = models.FloatField(_('12th Mark'), blank=True, null=True)
